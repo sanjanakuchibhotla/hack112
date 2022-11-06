@@ -1,26 +1,29 @@
 from cmu_112_graphics import *
+from emotioncolordictionary import *
 
-d = {'sad': [(120, 4, 153),(150, 27, 30),(150, 100, 2)]}
-
+# rgb to hex value
 def returnHex(r,g,b):
     return f'#{r:02x}{g:02x}{b:02x}'
 
-def emotionToColor(dict,emotion):
-    colors = dict[emotion]
+# given dictionary with emotion, returns hex values of colors associated with
+# that emotion
+def emotionToColor(dict):
     hexValues = []
-    for color in colors:
-        r,g,b = color
-        hexValues.append(returnHex(r,g,b))
-    return hexValues
+    for key in dict:
+        colors = dict[key]
+        for color in colors:
+            r,g,b = color
+            hexValues.append(returnHex(r,g,b))
+        return hexValues
 
 ## --------DRAWING---------
-userInput = input('emotion? ')
+d = generateRandColors()
 # initializes app values
 def appStarted(app):
     app.r = 4
     app.dots = []
     app.timerDelay = 1
-    app.colors = emotionToColor(d,userInput if userInput=='sad' else 'sad')
+    app.colors = emotionToColor(d)
     app.sqSize = app.height/10
     app.margin = app.width/20
     app.color = app.colors[0]
@@ -116,7 +119,7 @@ def drawColors(app, canvas):
 
 # draws the erase button
 def drawEraseButton(app, canvas):
-    canvas.create_oval(app.width - app.margin - app.sqSize, 
+    canvas.create_rectangle(app.width - app.margin - app.sqSize, 
                             app.margin + 3*app.sqSize,
                             app.width - app.margin,
                             app.margin + 4*app.sqSize, fill='white')

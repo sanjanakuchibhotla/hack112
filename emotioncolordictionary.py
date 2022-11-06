@@ -28,7 +28,7 @@ def createDict():
 emotionColors = createDict()
 
 def generateRandColors():
-    emotion = input('Enter an emotion bitch --> ')
+    emotion = input('Enter an emotion --> ')
     randomEmotion = dict()
     emotion = emotion.lower()
     if emotion not in emotionColors:
@@ -45,7 +45,6 @@ def generateRandColors():
                 two = random.randint(1, 19)
     randomEmotion[emotion] = [emotionColors[emotion][one], emotionColors[emotion][two],
         emotionColors[emotion][three]]
-    print(randomEmotion)
     return randomEmotion
 
-generateRandColors()
+#generateRandColors()

@@ -6,22 +6,9 @@ import csv
 # converting csv of data to dataframe
 dataframe = pd.read_csv('emotions.txt', sep=",",header=None)
 dfWords = dataframe[0]
-#print(dfWords)
 listOfEmotions = dfWords.values.tolist()
-# print(type(listOfEmotions))
-# print(listOfEmotions)
 setOfEmotions = set(listOfEmotions)
 subsetOfEmotions = set(listOfEmotions[0:5])
-# randomEmotion = input("Choose an emotion: ")
-# wordInList = False
-# while not wordInList:
-#     if randomEmotion not in setOfEmotions:
-#         randomEmotion = input("Choose another emotion")
-#     else:
-#         wordInList = True
-
-
-
 
 def createCSV():
     emotionsImages = dict()
@@ -36,7 +23,6 @@ def createCSV():
         for item in soup.find_all('img'):
             if 'gif' not in item['src']:
                 emotionsImages[emotion].append(item['src'])
-            
 
     with open('emotionimages.csv', 'w') as f:
         wr = csv.writer(f)

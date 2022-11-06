@@ -1,4 +1,4 @@
-import pandas as pd
+import random
 
 def strToInt(r):
     result = ''
@@ -20,13 +20,32 @@ def createDict():
         if firstLine:
             firstLine = False
             continue
-        (index, emotion, url, r, g, b) = line.split(',')
+        (_, emotion, _, r, g, b) = line.split(',')
         (r, g, b) = fixRGB(r, g, b)
         emotionColors[emotion] = emotionColors.get(emotion, []) + [(r, g, b)]
-    # df = pd.read_csv("emotions_images_colors_subset.csv")        
-    # emotions = df['Emotion']
-    # colors = df['color']
     return emotionColors
 
+emotionColors = createDict()
 
-print(createDict())
+def generateRandColors():
+    emotion = input('Enter an emotion bitch --> ')
+    randomEmotion = dict()
+    emotion = emotion.lower()
+    if emotion not in emotionColors:
+        print("Sorry! We don't have that emotion. Try a different one!")
+        return generateRandColors()
+    else:
+        (one, two, three) = (random.randint(1, 19), random.randint(1, 19), 
+            random.randint(1, 19))
+        while one == two:
+            one = random.randint(1,19)
+        while one == three:
+            one = random.randint(1, 19)
+            while two == three:
+                two = random.randint(1, 19)
+    randomEmotion[emotion] = [emotionColors[emotion][one], emotionColors[emotion][two],
+        emotionColors[emotion][three]]
+    print(randomEmotion)
+    return randomEmotion
+
+generateRandColors()

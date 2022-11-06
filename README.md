@@ -1,9 +1,9 @@
-# hack112
+# EMOTE - hack112
 ![EMOTE](emote.jpg?raw=true "EMOTE")
 
 Emote is a therapeutic drawing tool intended to 
 help users express their emotions through art.
-Usually people let their drawings represent their
+Usually, people let their drawings represent their
 feelings, but where should they start? 
 
 That's where Emote comes in. The user can simply
@@ -25,3 +25,5 @@ app using cmu 112 graphics, that selects three colors
 for the input emotion and allows the user to draw on
 the canvas, switching between colors and changing the
 size of the drawing tool as they like.
+
+Modules used: pandas, requests, bs4, csv, colorthief, io

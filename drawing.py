@@ -17,7 +17,12 @@ def emotionToColor(dict):
         return hexValues
 
 ## --------DRAWING---------
+name = 'Name: ' + (input("What's your name? "))
 d = generateRandColors()
+for key in d:
+    userInput = key
+userFeeling = 'I am feeling ' + userInput
+
 # initializes app values
 def appStarted(app):
     app.r = 4
@@ -33,6 +38,9 @@ def appStarted(app):
     app.slideR = 5
     app.lineX = app.width/2
     app.lineY = app.height - app.margin
+    app.start = True
+    app.image1 = app.loadImage('emote.jpg')
+    app.image2 = app.scaleImage(app.image1, 1/2)
 
 # actions when mouse is dragged
 def mouseDragged(app, event):
@@ -80,6 +88,8 @@ def mousePressed(app, event):
             changeColor(app,event,i)
 
 def keyPressed(app, event):
+    if event.key == 'Left':
+        app.start = False
     if event.key=='r':
         d = generateRandColors()
         app.colors = emotionToColor(d)
@@ -151,11 +161,27 @@ def drawSlider(app, canvas):
                        fill='black')
 
 def redrawAll(app, canvas):
-    for dot in app.dots:
-        cx, cy, color, r = dot
-        drawDot(app, canvas, cx, cy, color, r)
-    drawColors(app, canvas)
-    drawEraseButton(app, canvas)
-    drawSlider(app, canvas)
+    if app.start:
+        canvas.create_rectangle(0,0,app.width,app.height, fill = 'light blue')
+        canvas.create_text(app.width/2, app.height/4, text='Welcome to Emote!',
+                       fill='#9898F5', font='Helvetica 26 bold ')
+        canvas.create_text(app.width/2,app.height*3/4, text = 'Press the left key to play'\
+            , fill = 'black', font = 'Helvetica 15 bold') 
+        canvas.create_image(app.width/2, app.height/2, image=ImageTk.PhotoImage(app.image2))
+        canvas.create_text(59,25, text = userFeeling, fill = 'black', font\
+            = 'Times 15')
+        canvas.create_text(40,10, text = name, fill = 'black', font = \
+            'Times 15')
+    else:
+        canvas.create_text(59,25, text = userFeeling, fill = 'black', font\
+            = 'Times 15')
+        canvas.create_text(40,10, text = name, fill = 'black', font = \
+            'Times 15')
+        for dot in app.dots:
+            cx, cy, color, r = dot
+            drawDot(app, canvas, cx, cy, color, r)
+        drawColors(app, canvas)
+        drawEraseButton(app, canvas)
+        drawSlider(app, canvas)
 
 runApp(width=800,height=800)

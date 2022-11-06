@@ -21,6 +21,11 @@ def createDict():
             firstLine = False
             continue
         (_, emotion, _, r, g, b) = line.split(',')
+        res = ''
+        for chr in emotion:
+            if chr.isalpha():
+                res += chr
+        emotion = res
         (r, g, b) = fixRGB(r, g, b)
         emotionColors[emotion] = emotionColors.get(emotion, []) + [(r, g, b)]
     return emotionColors

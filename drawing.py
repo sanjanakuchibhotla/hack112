@@ -79,6 +79,11 @@ def mousePressed(app, event):
         for i in range(3):
             changeColor(app,event,i)
 
+def keyPressed(app, event):
+    if event.key=='r':
+        d = generateRandColors()
+        app.colors = emotionToColor(d)
+
 # checks if given x and y values are in the specified box
 def clickedInBox(app, x, y, boxNum):
     return ((app.width-app.margin-app.sqSize <= x <= app.width-app.margin) and
